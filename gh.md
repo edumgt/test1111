@@ -10,7 +10,7 @@ sudo apt install -y gh
 ```bash
 gh auth login
 ```
-
+    
 ## 1. gh 설치 여부 확인
 ```bash
 which gh && gh --version
