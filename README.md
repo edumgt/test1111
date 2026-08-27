@@ -44,19 +44,19 @@ gh run view --log
 
 ```mermaid
 flowchart TD
-    A[["push (main)"]] --> J
-    B[["pull_request (main)"]] --> J
-    C[["workflow_dispatch (수동)"]] --> J
+    A[["push - main"]] --> J
+    B[["pull_request - main"]] --> J
+    C[["workflow_dispatch - 수동"]] --> J
 
-    J[Job: test<br/>ubuntu-latest] --> S1[Checkout<br/>actions/checkout@v4]
-    S1 --> S2[List repo files<br/>ls -la]
-    S2 --> S3[Print environment info<br/>actor / branch / sha]
-    S3 --> S4[Sanity check<br/>README.md, gh.md 존재 확인]
-    S4 --> S5[Generate test.md<br/>실행 메타데이터 기록]
-    S5 --> D{event_name ==<br/>pull_request?}
-    D -- Yes --> E[커밋/푸시 생략]
-    D -- No --> S6[Commit and push test.md<br/>github-actions bot, skip ci]
-    S6 --> F[(원격 저장소<br/>test.md 반영)]
+    J["Job: test<br/>ubuntu-latest"] --> S1["Checkout<br/>actions/checkout@v4"]
+    S1 --> S2["List repo files<br/>ls -la"]
+    S2 --> S3["Print environment info<br/>actor / branch / sha"]
+    S3 --> S4["Sanity check<br/>README.md, gh.md 존재 확인"]
+    S4 --> S5["Generate test.md<br/>실행 메타데이터 기록"]
+    S5 --> D{"event_name is<br/>pull_request?"}
+    D -- Yes --> E["커밋/푸시 생략"]
+    D -- No --> S6["Commit and push test.md<br/>github-actions bot, skip ci"]
+    S6 --> F[("원격 저장소<br/>test.md 반영")]
 ```
 
 ## Git 브랜치 명령어: checkout vs switch
