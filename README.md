@@ -1,7 +1,3 @@
-# test1111
-
-## test2222
-
 ## 기술 스택
 
 - **Git / GitHub**: 버전 관리 및 원격 저장소 (`edumgt/test1111`)
