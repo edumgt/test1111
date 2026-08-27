@@ -39,3 +39,24 @@ gh workflow run test.yml
 gh run list --workflow test.yml
 gh run view --log
 ```
+
+## Git 브랜치 명령어: checkout vs switch
+
+`git checkout`은 브랜치 전환, 커밋 체크아웃, 파일 복원까지 겸하는 다목적 명령이고, `git switch`는 그중 브랜치 전환 기능만 분리한 최신(Git 2.23+) 명령이다.
+
+**git checkout**
+```bash
+git checkout main              # 브랜치 전환
+git checkout -b new-branch     # 브랜치 생성+전환
+git checkout <commit-sha>      # detached HEAD로 이동
+git checkout -- file.txt       # 파일을 마지막 커밋 상태로 되돌림 (변경사항 유실 위험)
+```
+브랜치 이름과 파일 경로를 문맥으로 구분하므로, 같은 이름의 브랜치와 파일이 있으면 혼동되거나 실수로 파일을 덮어쓸 위험이 있다.
+
+**git switch** (브랜치 전용, 더 안전)
+```bash
+git switch main                # 브랜치 전환
+git switch -c new-branch       # 브랜치 생성+전환 (checkout -b와 동일)
+git switch -d <commit-sha>     # detached HEAD (checkout과 동일)
+```
+파일 복원 기능이 없어 의도치 않은 파일 유실 위험이 없다. 파일 복원은 `git restore`로 분리되었다 (`git restore -- file.txt`).
