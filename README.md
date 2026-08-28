@@ -1,8 +1,24 @@
 ## 기술 스택
 
-- **Git / GitHub**: 버전 관리 및 원격 저장소 (`edumgt/test1111`)
-- **GitHub CLI (`gh`)**: 저장소, secret 등 GitHub 리소스 관리 (사용법은 [gh.md](gh.md) 참고)
-- **GitHub Actions**: CI 워크플로우 (`.github/workflows/test.yml`)
+이 저장소는 **KRX 유가증권 일별매매정보를 조회·표시하는 Python 웹 애플리케이션**과 보조 자동화 스크립트로 구성됩니다. 아래 표는 소스 코드와 `requirements.txt`를 기준으로 정리한 현재 기술 스택입니다.
+
+| 영역 | 기술 | 사용 목적 |
+|---|---|---|
+| 백엔드 | Python 3, FastAPI, Pydantic | REST API 제공, 요청·응답 모델 검증, 정적 파일 서빙 |
+| ASGI 서버 | Uvicorn | FastAPI 애플리케이션 로컬 실행 |
+| 외부 데이터 연동 | KRX Data API, Python 표준 라이브러리(`urllib`) | KOSPI 일별매매정보를 날짜별로 조회 |
+| 동시성 | `concurrent.futures.ThreadPoolExecutor` | 여러 거래일의 KRX API 요청을 제한된 병렬성으로 처리 |
+| 프런트엔드 | HTML5, CSS3, Vanilla JavaScript | 조회 화면, 날짜 입력, API 호출 및 결과 표시 |
+| 데이터 그리드 | AG Grid Community 36.1.0 (jsDelivr CDN) | 정렬·필터·페이지네이션·CSV 다운로드 기능 제공 |
+| 브라우저 자동화 | Playwright for Python, Chromium | `capture_naver.py`를 통한 웹 페이지 화면 캡처 |
+| CI/저장소 운영 | Git, GitHub, GitHub Actions, GitHub CLI (`gh`) | 버전 관리, 워크플로우 실행 및 GitHub 리소스 관리 |
+
+### 구성 원칙
+
+- 프런트엔드는 별도 번들러나 프레임워크 없이 FastAPI가 `/static` 경로로 직접 제공합니다.
+- 외부 UI 라이브러리는 AG Grid CDN만 사용합니다.
+- KRX 인증 키는 `KRX_KEY` 환경변수 또는 로컬 `.key` 파일에서 읽으며, `.key`는 Git에서 제외됩니다.
+- 자동화 테스트 프레임워크는 아직 구성되어 있지 않습니다. 현재 GitHub Actions는 저장소 점검과 `test.md` 리포트 생성에 집중합니다.
 
 ## KRX 유가증권 일별매매정보 API
 
