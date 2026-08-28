@@ -62,10 +62,10 @@ def format_date(value: date) -> str:
 
 
 def get_krx_key() -> str:
-    """Read KRX-KEY from an environment variable first, then the local .key file."""
-    key = os.getenv("KRX_KEY")
+    """Read the Codespaces-injected KRX_KEY first, then the local .key file."""
+    key = os.getenv("KRX_KEY", "").strip()
     if key:
-        return key.strip()
+        return key
 
     try:
         for line in KEY_FILE.read_text(encoding="utf-8").splitlines():
@@ -78,7 +78,7 @@ def get_krx_key() -> str:
 
     raise HTTPException(
         status_code=500,
-        detail="KRX API 키가 없습니다. KRX_KEY 환경변수 또는 .key의 KRX-KEY를 설정하세요.",
+        detail="KRX API 키가 없습니다. Codespaces secret KRX_KEY 환경변수 또는 .key의 KRX-KEY를 설정하세요.",
     )
 
 
