@@ -17,12 +17,18 @@
 
 - 프런트엔드는 별도 번들러나 프레임워크 없이 FastAPI가 `/static` 경로로 직접 제공합니다.
 - 외부 UI 라이브러리는 AG Grid CDN만 사용합니다.
-- KRX 인증 키는 `KRX_KEY` 환경변수 또는 로컬 `.key` 파일에서 읽으며, `.key`는 Git에서 제외됩니다.
+- KRX 인증 키는 Codespaces secret으로 주입되는 `KRX_KEY` 환경변수 또는 로컬 `.key` 파일에서 읽으며, `.key`는 Git에서 제외됩니다.
 - 자동화 테스트 프레임워크는 아직 구성되어 있지 않습니다. 현재 GitHub Actions는 저장소 점검과 `test.md` 리포트 생성에 집중합니다.
 
 ## KRX 유가증권 일별매매정보 API
 
-FastAPI 서비스는 `.key` 파일의 `KRX-KEY`(또는 `KRX_KEY` 환경변수)를 사용해 KRX 유가증권 일별매매정보를 기간 단위로 조회합니다. 키는 Git에 포함되지 않습니다.
+FastAPI 서비스는 Codespaces secret으로 주입되는 `KRX_KEY` 환경변수(우선) 또는 `.key` 파일의 `KRX-KEY`를 사용해 KRX 유가증권 일별매매정보를 기간 단위로 조회합니다. 키는 Git에 포함되지 않습니다.
+
+GitHub CLI로 Codespaces secret을 등록한 뒤 Codespace를 새로 만들거나 다시 시작합니다.
+
+```bash
+gh secret set KRX_KEY --user --app codespaces
+```
 
 ```bash
 pip install -r requirements.txt
