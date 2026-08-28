@@ -1,0 +1,28 @@
+:root { font-family: Inter, Pretendard, "Noto Sans KR", system-ui, sans-serif; color: #172035; background: #f5f7fb; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+.page-shell { max-width: 1520px; margin: 0 auto; padding: 44px 28px 32px; }
+.hero { margin-bottom: 28px; }
+.eyebrow { color: #2d66db; font-size: 12px; font-weight: 800; letter-spacing: .12em; margin: 0 0 10px; }
+h1 { font-size: clamp(28px, 4vw, 42px); letter-spacing: -.045em; margin: 0; }
+.hero > p:last-child { color: #667085; margin: 11px 0 0; }
+.query-panel { align-items: end; background: #fff; border: 1px solid #e3e8f1; border-radius: 14px; display: flex; gap: 12px; padding: 18px; }
+.date-field { display: grid; gap: 7px; }
+label { color: #49566f; font-size: 13px; font-weight: 700; }
+input, button { border-radius: 8px; font: inherit; }
+input { border: 1px solid #cdd5e1; min-height: 42px; padding: 0 11px; }
+button { background: #1e5bd7; border: 1px solid #1e5bd7; color: #fff; cursor: pointer; font-weight: 700; min-height: 42px; padding: 0 17px; }
+button:hover { background: #174aaf; }
+button:disabled { cursor: not-allowed; opacity: .5; }
+button.secondary { background: #fff; border-color: #cdd5e1; color: #344054; }
+.status { color: #667085; font-size: 14px; margin: 16px 2px; min-height: 20px; }
+.status.error { color: #b42318; }
+.summary { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); margin-bottom: 18px; }
+.summary article { background: #fff; border: 1px solid #e3e8f1; border-radius: 12px; display: grid; gap: 6px; padding: 17px; }
+.summary span { color: #667085; font-size: 13px; }
+.summary strong { font-size: 22px; letter-spacing: -.02em; }
+.grid-panel { background: #fff; border: 1px solid #dbe3ef; border-radius: 14px; overflow: hidden; padding: 10px; }
+#stock-grid { height: min(66vh, 720px); min-height: 460px; width: 100%; }
+.up-value { color: #d92d20; font-weight: 700; }
+.down-value { color: #175cd3; font-weight: 700; }
+@media (max-width: 640px) { .page-shell { padding: 28px 14px; } .query-panel { align-items: stretch; flex-direction: column; } .summary { grid-template-columns: 1fr; } }

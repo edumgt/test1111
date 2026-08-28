@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KRX 유가증권 일별매매정보</title>
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community@36.1.0/dist/ag-grid-community.min.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="hero">
+        <p class="eyebrow">KRX DATA · KOSPI</p>
+        <h1>유가증권 일별매매정보</h1>
+        <p>기간을 선택해 종가, 거래량, 거래대금 및 시가총액을 조회하세요.</p>
+      </header>
+      <section class="query-panel" aria-label="조회 조건">
+        <div class="date-field"><label for="from-date">시작일</label><input id="from-date" type="date" required /></div>
+        <div class="date-field"><label for="to-date">종료일</label><input id="to-date" type="date" required /></div>
+        <button id="search-button" type="button">조회</button>
+        <button id="csv-button" class="secondary" type="button" disabled>CSV 다운로드</button>
+      </section>
+      <p id="status" class="status" role="status">조회 기간을 선택하세요.</p>
+      <section class="summary" aria-label="조회 결과 요약">
+        <article><span>조회 기간</span><strong id="period-value">-</strong></article>
+        <article><span>거래일</span><strong id="days-value">-</strong></article>
+        <article><span>종목 레코드</span><strong id="records-value">-</strong></article>
+      </section>
+      <section class="grid-panel" aria-label="유가증권 일별매매정보 표"><div id="stock-grid" aria-label="유가증권 일별매매정보"></div></section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

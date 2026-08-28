@@ -4,6 +4,28 @@
 - **GitHub CLI (`gh`)**: 저장소, secret 등 GitHub 리소스 관리 (사용법은 [gh.md](gh.md) 참고)
 - **GitHub Actions**: CI 워크플로우 (`.github/workflows/test.yml`)
 
+## KRX 유가증권 일별매매정보 API
+
+FastAPI 서비스는 `.key` 파일의 `KRX-KEY`(또는 `KRX_KEY` 환경변수)를 사용해 KRX 유가증권 일별매매정보를 기간 단위로 조회합니다. 키는 Git에 포함되지 않습니다.
+
+```bash
+pip install -r requirements.txt
+uvicorn krx_daily_api:app --reload
+```
+
+서버를 실행한 뒤 `http://127.0.0.1:8000/`에서 AG Grid Community 기반의 조회 화면을 사용할 수 있습니다. 그리드는 정렬, 열 필터, 페이지네이션과 CSV 다운로드를 지원합니다.
+
+조회 예시:
+
+```bash
+curl 'http://127.0.0.1:8000/api/v1/stocks/daily?from=2026-08-24&to=2026-08-28'
+```
+
+- `from`, `to`: `YYYYMMDD` 또는 `YYYY-MM-DD` 형식
+- 최대 조회 기간: 366일
+- 주말은 자동으로 건너뜁니다. 휴장일은 빈 결과로 제외됩니다.
+- Swagger UI: `http://127.0.0.1:8000/docs`
+
 ## GitHub Actions 상세
 
 워크플로우 이름: `Test` (`.github/workflows/test.yml`)
